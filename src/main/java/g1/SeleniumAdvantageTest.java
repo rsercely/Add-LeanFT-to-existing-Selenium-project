@@ -3,6 +3,7 @@ package g1;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -35,18 +36,16 @@ public class SeleniumAdvantageTest {
 	WebElement tabletToPurchse;
 	WebElement addQuantity;
 	WebElement addToCartBtn;
+	WebElement openShoppingCart;
 	WebElement checkoutBtn;
-	WebElement purchaseUsername;
 	WebElement purchaseUsernameField;
-	WebElement purchasePassword;
 	WebElement purchasePasswordField;
 	WebElement loginBtn;
 	WebElement shippingNextBtn;
 	WebElement safepayUsername;
-	WebElement safepayUernameField;
-	WebElement safepayPassword;
+	WebElement safepayUsernameField;
 	WebElement safepayPasswordField;
-	WebElement buyNowBtn;
+	WebElement payNowBtn;
 	
 	Random randomGenerator = new Random();
 	int randomInt = randomGenerator.nextInt(100);
@@ -67,19 +66,6 @@ public class SeleniumAdvantageTest {
 		driver.quit();
 	}
 
-    public void findPurchaseElements(){
-		purchaseUsername = driver.findElement(By.cssSelector("div#orderPayment > div:nth-child(1) > div > div:nth-child(1) > sec-form > sec-view:nth-child(1) > div > label"));
-		purchaseUsernameField = driver.findElement(By.xpath("//*[@id='orderPayment']/div[1]/div/div[1]/sec-form/sec-view[1]/div/input"));
-		purchasePassword = driver.findElement(By.cssSelector("div#orderPayment > div:nth-child(1) > div > div:nth-child(1) > sec-form > sec-view:nth-child(2) > div > label"));
-		purchasePasswordField = driver.findElement(By.xpath("//*[@id='orderPayment']/div[1]/div/div[1]/sec-form/sec-view[2]/div/input"));
-		loginBtn = driver.findElement(By.xpath("//*[@id='orderPayment']/div[1]/div/div[1]/sec-form/sec-sender/a"));
-		shippingNextBtn = driver.findElement(By.xpath("//*[@id='userSection']/div[1]/div[3]/button"));
-		safepayUsername = driver.findElement(By.xpath("//*[@id='paymentMethod']/div/div[2]/sec-form/sec-view[1]/div/label"));
-		safepayUernameField = driver.findElement(By.cssSelector("div#paymentMethod > div > div:nth-child(3) > sec-form > sec-view:nth-child(1) > div > input"));
-		safepayPassword = driver.findElement(By.cssSelector("div#paymentMethod > div > div:nth-child(3) > sec-form > sec-view:nth-child(2) > div > label"));
-		safepayPasswordField = driver.findElement(By.xpath("//*[@id='paymentMethod']/div/div[2]/sec-form/sec-view[2]/div/label"));
-		buyNowBtn = driver.findElement(By.xpath("//*[@id='paymentMethod']/div/div[2]/sec-form/div[2]/label/sec-sender/a"));
-	}
 
 	public void findNewAccountElements() throws InterruptedException {
         usernameField = driver.findElement(By.name("usernameRegisterPage"));
@@ -88,26 +74,6 @@ public class SeleniumAdvantageTest {
         confirmPassField = driver.findElement(By.name("confirm_passwordRegisterPage"));
         iAgreeCheckBox = driver.findElement(By.name("i_agree"));
         registerBtn = driver.findElement(By.id("register_btnundefined"));
-	}
-
-	public void findElementsss(){
-		tablets = driver.findElement(By.xpath("//*[@id='TabletsImg']"));
-		tabletToPurchse = driver.findElement(By.cssSelector("html > body > div:nth-child(8) > section > article > div:nth-child(4) > div > div > div:nth-child(2) > ul > li:nth-child(1) > img"));
-		addQuantity = driver.findElement(By.className("plus"));
-		addToCartBtn = driver.findElement(By.xpath("//*[@id='productProperties']/div[3]/button"));
-		checkoutBtn = driver.findElement(By.cssSelector("tool-tip-cart#toolTipCart > div > table > tfoot > tr:nth-child(2) > td > button"));
-		purchaseUsername = driver.findElement(By.cssSelector("div#orderPayment > div:nth-child(1) > div > div:nth-child(1) > sec-form > sec-view:nth-child(1) > div > label"));
-		purchaseUsernameField = driver.findElement(By.xpath("//*[@id='orderPayment']/div[1]/div/div[1]/sec-form/sec-view[1]/div/input"));
-		purchasePassword = driver.findElement(By.cssSelector("div#orderPayment > div:nth-child(1) > div > div:nth-child(1) > sec-form > sec-view:nth-child(2) > div > label"));
-		purchasePasswordField = driver.findElement(By.xpath("//*[@id='orderPayment']/div[1]/div/div[1]/sec-form/sec-view[2]/div/input"));
-		loginBtn = driver.findElement(By.xpath("//*[@id='orderPayment']/div[1]/div/div[1]/sec-form/sec-sender/a"));
-		shippingNextBtn = driver.findElement(By.xpath("//*[@id='userSection']/div[1]/div[3]/button"));
-		safepayUsername = driver.findElement(By.xpath("//*[@id='paymentMethod']/div/div[2]/sec-form/sec-view[1]/div/label"));
-		safepayUernameField = driver.findElement(By.cssSelector("div#paymentMethod > div > div:nth-child(3) > sec-form > sec-view:nth-child(1) > div > input"));
-		safepayPassword = driver.findElement(By.cssSelector("div#paymentMethod > div > div:nth-child(3) > sec-form > sec-view:nth-child(2) > div > label"));
-		safepayPasswordField = driver.findElement(By.xpath("//*[@id='paymentMethod']/div/div[2]/sec-form/sec-view[2]/div/label"));
-		buyNowBtn = driver.findElement(By.xpath("//*[@id='paymentMethod']/div/div[2]/sec-form/div[2]/label/sec-sender/a"));
-
 	}
 
 	@Ignore
@@ -167,7 +133,7 @@ public class SeleniumAdvantageTest {
 
 		driver.get("http://www.advantageonlineshopping.com");
 		Thread.sleep(10*1000);
-        tablets = driver.findElement(By.xpath("//*[@id='tabletsImg']"));
+        tablets = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='tabletsImg']")));
         tablets.click();
         tabletToPurchse = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("html > body > div:nth-child(8) > section > article > div:nth-child(4) > div > div > div:nth-child(2) > ul > li:nth-child(1) > p:nth-child(4) > a")));
         tabletToPurchse.click();
@@ -175,24 +141,39 @@ public class SeleniumAdvantageTest {
         addQuantity.click();
         addToCartBtn = driver.findElement(By.xpath("//*[@id='productProperties']/div[3]/button"));
         addToCartBtn.click();
+        openShoppingCart = driver.findElement(By.id("menuCart"));
+        openShoppingCart.click();
         checkoutBtn = driver.findElement(By.cssSelector("tool-tip-cart#toolTipCart > div > table > tfoot > tr:nth-child(2) > td > button"));
         checkoutBtn.click();
 
-		purchaseUsername.click();
+		purchaseUsernameField = driver.findElement(By.xpath("//*[@id='orderPayment']/div[1]/div/div[1]/sec-form/sec-view[1]/div/input"));
+		purchasePasswordField = driver.findElement(By.xpath("//*[@id='orderPayment']/div[1]/div/div[1]/sec-form/sec-view[2]/div/input"));
+		loginBtn = driver.findElement(By.id("login_btnundefined"));
+
+/*
 		purchaseUsernameField.sendKeys("LFT" + randomInt);
-		purchasePassword.click();
 		purchasePasswordField.sendKeys("Password1");
-		
+*/
+		purchaseUsernameField.sendKeys("rsercely2");
+		purchasePasswordField.sendKeys("1Qaz");
 		loginBtn.click();
 
-        findPurchaseElements();
-		safepayUsername.click();
-		safepayUsername.sendKeys("SafePayU");
-		safepayPassword.click();
+		shippingNextBtn = wait.until(ExpectedConditions.elementToBeClickable(By.id("next_btn")));
+		shippingNextBtn.click();
+
+		safepayUsernameField = wait.until(ExpectedConditions.elementToBeClickable(By.name("safepay_username")));
+		safepayPasswordField = driver.findElement(By.name("safepay_password"));
+		payNowBtn = driver.findElement(By.id("pay_now_btn_SAFEPAY"));
+
+		safepayUsernameField.clear(); // must clear as sendKeys appends to what is already there
+		safepayUsernameField.sendKeys("SafePayU");
+		safepayPasswordField.clear(); // and eventually the fields become too long
 		safepayPasswordField.sendKeys("Password1");
-		
-		buyNowBtn.click();
-		
+		payNowBtn.click();
+
+		WebElement paymentSuccess = (wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id='orderPaymentSuccess']/h2/span"))));
+		Thread.sleep(3*1000);
+		Assert.assertTrue(paymentSuccess.isDisplayed());
 	}
 
 }
