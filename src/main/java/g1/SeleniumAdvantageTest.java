@@ -159,8 +159,8 @@ public class SeleniumAdvantageTest {
             purchaseUsernameField.sendKeys("LFT" + randomInt);
             purchasePasswordField.sendKeys("Password1");
         } else {
-            purchaseUsernameField.sendKeys("rsercely2");
-            purchasePasswordField.sendKeys("1Qaz");
+			purchaseUsernameField.sendKeys("<your AOS account name here>");
+			purchasePasswordField.sendKeys("<your AOS password here>");
         }
 		loginBtn.click();
 
