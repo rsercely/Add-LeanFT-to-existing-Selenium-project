@@ -1,6 +1,13 @@
 package g1;
 
+import com.hpe.leanft.selenium.By;
+import com.hpe.leanft.selenium.ByEach;
+
 import org.openqa.selenium.*;
+// if you don't comment this out    import .By;
+// you get this error:
+//java: a type with the same simple name is already defined
+// by the single-type-import of com.hpe.leanft.selenium.By
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -8,10 +15,15 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Pattern;
 
 import org.junit.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SeleniumAdvantageTest {
 
@@ -90,13 +102,15 @@ public class SeleniumAdvantageTest {
 		// open users page - takes a while so wait until it is clickable
         userBtn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/header/nav/ul/li[3]/a/a")));
 // or this
-//      userBtn = driver.findElement(By.xpath("//*[@id='menuUser']"));
+//      userBtn = driver.findElement(.By.xpath("//*[@id='menuUser']"));
         userBtn.click();
 
-        // createNewAccountBtn = driver.findElement(By.className("create-new-account.ng-scope"));
+        // createNewAccountBtn = driver.findElement(.By.className("create-new-account.ng-scope"));
         // above fails. Selenium sees classNames with a space in them as a "compound selecter" and fails
-        createNewAccountBtn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/login-modal/div/div/div[3]/a[2]")));
-        Thread.sleep(1*1000); // even with the above, need to sleep a bit
+// Selenium        createNewAccountBtn = wait.until(ExpectedConditions.elementToBeClickable(.By.xpath("/html/body/login-modal/div/div/div[3]/a[2]")));
+
+		WebElement newAccountBtn = wait.until(ExpectedConditions.elementToBeClickable(By.visibleText("CREATE NEW ACCOUNT")));
+		Thread.sleep(1*1000); // even with the above, need to sleep a bit
         createNewAccountBtn.click();
         // now the Create Account window is open
         // learn the new accounts page fields
@@ -134,14 +148,39 @@ public class SeleniumAdvantageTest {
         System.out.println("success");
 	}
 
-	public void PurchaseTest() throws Exception{
+	public void PurchaseTest() throws Exception {
 
 		driver.get("http://www.advantageonlineshopping.com");
-		tablets = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='tabletsImg']")));
-        tablets.click();
-        tabletToPurchase = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("html > body > div:nth-child(8) > section > article > div:nth-child(4) > div > div > div:nth-child(2) > ul > li:nth-child(1) > p:nth-child(4) > a")));
-        Thread.sleep(1*1000);
-        tabletToPurchase.click();
+//selenium		tablets = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='tabletsImg']")));
+		tablets = wait.until(ExpectedConditions.elementToBeClickable(By.visibleText("TABLETS")));
+		tablets.click();
+//selenium fixed item       tabletToPurchase = wait.until(ExpectedConditions.elementToBeClickable(.By.cssSelector("html > body > div:nth-child(8) > section > article > div:nth-child(4) > div > div > div:nth-child(2) > ul > li:nth-child(1) > p:nth-child(4) > a")));
+
+// showing how LeanFT for Selenium can use multiple properties with Regular Expressions. Demo this
+// adding the looping and delay just so that the random nature is evident
+		int randomItem = randomGenerator.nextInt(3);
+
+		for (int i=0;i<5;i++){
+			wait.until(ExpectedConditions.elementToBeClickable(By.name("buy_now"))); // make sure that the item page is up
+			Thread.sleep(3*1000);
+			tabletToPurchase = driver.findElements(new ByEach(
+					By.tagName("a"),
+					By.visibleText(Pattern.compile("^HP.*"))
+			)).get(i);
+			System.out.println(tabletToPurchase.getText());
+
+			Thread.sleep(1*1000);
+			tabletToPurchase.click();
+			//			tabletToPurchase.click();
+			Thread.sleep(5*1000);
+
+			WebElement price = driver.findElement(By.xpath("//*[@id='Description']/h2"));
+			System.out.println(price.getText());
+			driver.navigate().back();
+
+			randomItem = randomGenerator.nextInt(3);
+		}
+		tabletToPurchase.click();
         addQuantity = driver.findElement(By.className("plus"));
         addQuantity.click();
         addToCartBtn = driver.findElement(By.xpath("//*[@id='productProperties']/div[3]/button"));
