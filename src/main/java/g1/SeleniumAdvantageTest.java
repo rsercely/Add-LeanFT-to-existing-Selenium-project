@@ -4,7 +4,8 @@ import com.hpe.leanft.selenium.By;
 import com.hpe.leanft.selenium.ByEach;
 
 import org.openqa.selenium.*;
-// if you don't comment this out    import .By;
+// if you don't comment this out
+// import org.openq.selenium.By;
 // you get this error:
 //java: a type with the same simple name is already defined
 // by the single-type-import of com.hpe.leanft.selenium.By
@@ -21,9 +22,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 import org.junit.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SeleniumAdvantageTest {
 
@@ -163,10 +161,10 @@ public class SeleniumAdvantageTest {
 		for (int i=0;i<5;i++){
 			wait.until(ExpectedConditions.elementToBeClickable(By.name("buy_now"))); // make sure that the item page is up
 			Thread.sleep(3*1000);
-			tabletToPurchase = driver.findElements(new ByEach(
-					By.tagName("a"),
-					By.visibleText(Pattern.compile("^HP.*"))
-			)).get(i);
+            tabletToPurchase = driver.findElements(new ByEach(
+                    By.tagName("a"),
+                    By.visibleText(Pattern.compile("^HP.*"))
+            )).get(randomItem);
 			System.out.println(tabletToPurchase.getText());
 
 			Thread.sleep(1*1000);
@@ -180,6 +178,10 @@ public class SeleniumAdvantageTest {
 
 			randomItem = randomGenerator.nextInt(3);
 		}
+        tabletToPurchase = driver.findElements(new ByEach(
+                By.tagName("a"),
+                By.visibleText(Pattern.compile("^HP.*"))
+        )).get(randomItem);
 		tabletToPurchase.click();
         addQuantity = driver.findElement(By.className("plus"));
         addQuantity.click();
@@ -198,8 +200,8 @@ public class SeleniumAdvantageTest {
             purchaseUsernameField.sendKeys("LFT" + randomInt);
             purchasePasswordField.sendKeys("Password1");
         } else {
-			purchaseUsernameField.sendKeys("<your AOS account name here>");
-			purchasePasswordField.sendKeys("<your AOS password here>");
+            purchaseUsernameField.sendKeys("<your AOS account name here>");
+            purchasePasswordField.sendKeys("<your AOS password here>");
         }
 		loginBtn.click();
 
