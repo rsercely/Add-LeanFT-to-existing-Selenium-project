@@ -8,7 +8,7 @@
     <!--parameter name="param" value="value" /-->
 
     <classes>
-      <class name="g1.LeanFtTest">
+      <class name="g1.SeleniumAdvantageTest">
         <methods>
           <include name="test"/>
           <!-- <exclude name=".*MethodsToExclude.*"/> -->

@@ -26,7 +26,7 @@ import org.junit.*;
 public class SeleniumAdvantageTest {
 
 //    static boolean createAndUseNewUser = true;
-  static boolean createAndUseNewUser = false;
+  private static final boolean createAndUseNewUser = false;
 
     @Test
     public void runTests() throws Exception {
@@ -36,38 +36,38 @@ public class SeleniumAdvantageTest {
         PurchaseTest();
     }
 
-    static WebDriver driver;
-    static WebDriverWait wait;
+    private static WebDriver driver;
+    private static WebDriverWait wait;
     //Declaring elements for tests
     //Elements for registration test
-	WebElement userBtn;
-	WebElement createNewAccountBtn;
-	WebElement usernameField;
-	WebElement emailField;
-	WebElement passwordField;
-	WebElement confirmPassField;
+	private WebElement userBtn;
+	private WebElement createNewAccountBtn;
+	private WebElement usernameField;
+	private WebElement emailField;
+	private WebElement passwordField;
+	private WebElement confirmPassField;
 	
-	WebElement iAgreeCheckBox;
-	WebElement registerBtn;
-	WebElement whoLoggedIn;
+	private WebElement iAgreeCheckBox;
+	private WebElement registerBtn;
+	// --Commented out by Inspection (7/17/2018 11:52 AM):WebElement whoLoggedIn;
 	
 	//Elements for purchase test
-	WebElement tablets;
-	WebElement tabletToPurchase;
-	WebElement addQuantity;
-	WebElement addToCartBtn;
-	WebElement openShoppingCart;
-	WebElement checkoutBtn;
-	WebElement purchaseUsernameField;
-	WebElement purchasePasswordField;
-	WebElement loginBtn;
-	WebElement shippingNextBtn;
-	WebElement safepayUsernameField;
-	WebElement safepayPasswordField;
-	WebElement payNowBtn;
+	private WebElement tablets;
+	private WebElement tabletToPurchase;
+	private WebElement addQuantity;
+	private WebElement addToCartBtn;
+	private WebElement openShoppingCart;
+	private WebElement checkoutBtn;
+	private WebElement purchaseUsernameField;
+	private WebElement purchasePasswordField;
+	private WebElement loginBtn;
+	private WebElement shippingNextBtn;
+	private WebElement safepayUsernameField;
+	private WebElement safepayPasswordField;
+	private WebElement payNowBtn;
 	
-	Random randomGenerator = new Random();
-	int randomInt = randomGenerator.nextInt(100);
+	private final Random randomGenerator = new Random();
+	private int randomInt = randomGenerator.nextInt(100);
 
 	@Before
 	public void beforeClass() throws InterruptedException {
@@ -84,7 +84,7 @@ public class SeleniumAdvantageTest {
 	}
 
 
-	public void findNewAccountElements() throws InterruptedException {
+	private void findNewAccountElements() {
         usernameField = driver.findElement(By.name("usernameRegisterPage"));
 		emailField = driver.findElement(By.name("emailRegisterPage"));
         passwordField = driver.findElement(By.name("passwordRegisterPage"));
@@ -93,7 +93,7 @@ public class SeleniumAdvantageTest {
         registerBtn = driver.findElement(By.id("register_btnundefined"));
 	}
 
-	public void RegistrationTest() throws Exception{
+	private void RegistrationTest() throws Exception{
 		//navigation
 		driver.get("http://www.advantageonlineshopping.com");
 
@@ -146,8 +146,7 @@ public class SeleniumAdvantageTest {
         System.out.println("success");
 	}
 
-	public void PurchaseTest() throws Exception {
-
+	private void PurchaseTest() throws Exception{
 		driver.get("http://www.advantageonlineshopping.com");
 //selenium		tablets = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='tabletsImg']")));
 		tablets = wait.until(ExpectedConditions.elementToBeClickable(By.visibleText("TABLETS")));
