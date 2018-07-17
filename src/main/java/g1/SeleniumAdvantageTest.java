@@ -38,9 +38,6 @@ public class SeleniumAdvantageTest {
 
     private static WebDriver driver;
     private static WebDriverWait wait;
-    //Declaring elements for tests
-    //Elements for registration test
-	private WebElement userBtn;
 	private WebElement createNewAccountBtn;
 	private WebElement usernameField;
 	private WebElement emailField;
@@ -50,22 +47,7 @@ public class SeleniumAdvantageTest {
 	private WebElement iAgreeCheckBox;
 	private WebElement registerBtn;
 	// --Commented out by Inspection (7/17/2018 11:52 AM):WebElement whoLoggedIn;
-	
-	//Elements for purchase test
-	private WebElement tablets;
-	private WebElement tabletToPurchase;
-	private WebElement addQuantity;
-	private WebElement addToCartBtn;
-	private WebElement openShoppingCart;
-	private WebElement checkoutBtn;
-	private WebElement purchaseUsernameField;
-	private WebElement purchasePasswordField;
-	private WebElement loginBtn;
-	private WebElement shippingNextBtn;
-	private WebElement safepayUsernameField;
-	private WebElement safepayPasswordField;
-	private WebElement payNowBtn;
-	
+
 	private final Random randomGenerator = new Random();
 	private int randomInt = randomGenerator.nextInt(100);
 
@@ -98,7 +80,7 @@ public class SeleniumAdvantageTest {
 		driver.get("http://www.advantageonlineshopping.com");
 
 		// open users page - takes a while so wait until it is clickable
-        userBtn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/header/nav/ul/li[3]/a/a")));
+		WebElement userBtn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/header/nav/ul/li[3]/a/a")));
 // or this
 //      userBtn = driver.findElement(.By.xpath("//*[@id='menuUser']"));
         userBtn.click();
@@ -149,7 +131,7 @@ public class SeleniumAdvantageTest {
 	private void PurchaseTest() throws Exception{
 		driver.get("http://www.advantageonlineshopping.com");
 //selenium		tablets = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='tabletsImg']")));
-		tablets = wait.until(ExpectedConditions.elementToBeClickable(By.visibleText("TABLETS")));
+		WebElement tablets = wait.until(ExpectedConditions.elementToBeClickable(By.visibleText("TABLETS")));
 		tablets.click();
 //selenium fixed item       tabletToPurchase = wait.until(ExpectedConditions.elementToBeClickable(.By.cssSelector("html > body > div:nth-child(8) > section > article > div:nth-child(4) > div > div > div:nth-child(2) > ul > li:nth-child(1) > p:nth-child(4) > a")));
 
@@ -157,7 +139,8 @@ public class SeleniumAdvantageTest {
 // adding the looping and delay just so that the random nature is evident
 		int randomItem = randomGenerator.nextInt(3);
 
-		for (int i=0;i<5;i++){
+		WebElement tabletToPurchase;
+		for (int i = 0; i<5; i++){
 			wait.until(ExpectedConditions.elementToBeClickable(By.name("buy_now"))); // make sure that the item page is up
 			Thread.sleep(3*1000);
             tabletToPurchase = driver.findElements(new ByEach(
@@ -182,18 +165,18 @@ public class SeleniumAdvantageTest {
                 By.visibleText(Pattern.compile("^HP.*"))
         )).get(randomItem);
 		tabletToPurchase.click();
-        addQuantity = driver.findElement(By.className("plus"));
+		WebElement addQuantity = driver.findElement(By.className("plus"));
         addQuantity.click();
-        addToCartBtn = driver.findElement(By.xpath("//*[@id='productProperties']/div[3]/button"));
+		WebElement addToCartBtn = driver.findElement(By.xpath("//*[@id='productProperties']/div[3]/button"));
         addToCartBtn.click();
-        openShoppingCart = wait.until(ExpectedConditions.elementToBeClickable(By.id("menuCart")));
+		WebElement openShoppingCart = wait.until(ExpectedConditions.elementToBeClickable(By.id("menuCart")));
         openShoppingCart.click();
-        checkoutBtn = driver.findElement(By.cssSelector("tool-tip-cart#toolTipCart > div > table > tfoot > tr:nth-child(2) > td > button"));
+		WebElement checkoutBtn = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("tool-tip-cart#toolTipCart > div > table > tfoot > tr:nth-child(2) > td > button")));
         checkoutBtn.click();
 
-		purchaseUsernameField = driver.findElement(By.xpath("//*[@id='orderPayment']/div[1]/div/div[1]/sec-form/sec-view[1]/div/input"));
-		purchasePasswordField = driver.findElement(By.xpath("//*[@id='orderPayment']/div[1]/div/div[1]/sec-form/sec-view[2]/div/input"));
-		loginBtn = driver.findElement(By.id("login_btnundefined"));
+		WebElement purchaseUsernameField = driver.findElement(By.xpath("//*[@id='orderPayment']/div[1]/div/div[1]/sec-form/sec-view[1]/div/input"));
+		WebElement purchasePasswordField = driver.findElement(By.xpath("//*[@id='orderPayment']/div[1]/div/div[1]/sec-form/sec-view[2]/div/input"));
+		WebElement loginBtn = driver.findElement(By.id("login_btnundefined"));
 
 		if (createAndUseNewUser) {
             purchaseUsernameField.sendKeys("LFT" + randomInt);
@@ -204,12 +187,12 @@ public class SeleniumAdvantageTest {
         }
 		loginBtn.click();
 
-		shippingNextBtn = wait.until(ExpectedConditions.elementToBeClickable(By.id("next_btn")));
+		WebElement shippingNextBtn = wait.until(ExpectedConditions.elementToBeClickable(By.id("next_btn")));
 		shippingNextBtn.click();
 
-		safepayUsernameField = wait.until(ExpectedConditions.elementToBeClickable(By.name("safepay_username")));
-		safepayPasswordField = driver.findElement(By.name("safepay_password"));
-		payNowBtn = driver.findElement(By.id("pay_now_btn_SAFEPAY"));
+		WebElement safepayUsernameField = wait.until(ExpectedConditions.elementToBeClickable(By.name("safepay_username")));
+		WebElement safepayPasswordField = driver.findElement(By.name("safepay_password"));
+		WebElement payNowBtn = driver.findElement(By.id("pay_now_btn_SAFEPAY"));
 
 		safepayUsernameField.clear(); // must clear as sendKeys appends to what is already there
 		safepayUsernameField.sendKeys("SafePayU");
