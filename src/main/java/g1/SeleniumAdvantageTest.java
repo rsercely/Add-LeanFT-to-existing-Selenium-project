@@ -1,3 +1,8 @@
+/*
+Because this script does a purchase, it signs in
+You must update the username/password values below
+to those of your personal account
+ */
 package g1;
 
 import com.hpe.leanft.selenium.By;
