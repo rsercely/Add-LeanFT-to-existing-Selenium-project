@@ -1,3 +1,8 @@
+/*
+Because this script does a purchase, it signs in
+You must update the username/password values below
+to those of your personal account
+ */
 package g1;
 
 import org.openqa.selenium.*;
@@ -70,7 +75,7 @@ public class SeleniumAdvantageTest {
 	
 	@After
 	public void afterClass(){
-		driver.quit();
+		//driver.quit();
 	}
 
 
@@ -138,6 +143,7 @@ public class SeleniumAdvantageTest {
 
 		driver.get("http://www.advantageonlineshopping.com");
 		tablets = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='tabletsImg']")));
+		Thread.sleep(1*1000);
         tablets.click();
         tabletToPurchase = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("html > body > div:nth-child(8) > section > article > div:nth-child(4) > div > div > div:nth-child(2) > ul > li:nth-child(1) > p:nth-child(4) > a")));
         Thread.sleep(1*1000);
@@ -149,6 +155,7 @@ public class SeleniumAdvantageTest {
         openShoppingCart = wait.until(ExpectedConditions.elementToBeClickable(By.id("menuCart")));
         openShoppingCart.click();
         checkoutBtn = driver.findElement(By.cssSelector("tool-tip-cart#toolTipCart > div > table > tfoot > tr:nth-child(2) > td > button"));
+		Thread.sleep(1*1000);
         checkoutBtn.click();
 
 		purchaseUsernameField = driver.findElement(By.xpath("//*[@id='orderPayment']/div[1]/div/div[1]/sec-form/sec-view[1]/div/input"));

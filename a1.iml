@@ -52,6 +52,6 @@
     <orderEntry type="library" name="Maven: io.netty:netty:3.5.7.Final" level="project" />
     <orderEntry type="library" name="Maven: org.seleniumhq.selenium:selenium-support:2.53.1" level="project" />
     <orderEntry type="library" name="Maven: org.seleniumhq.selenium:selenium-leg-rc:2.53.1" level="project" />
-    <orderEntry type="library" name="Maven: com.hpe.lft:selenium-sdk:14.3.0" level="project" />
+    <orderEntry type="library" name="Maven: com.hpe.lft:selenium-sdk:14.52.0" level="project" />
   </component>
 </module>

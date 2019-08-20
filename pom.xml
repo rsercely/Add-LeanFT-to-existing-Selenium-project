@@ -24,7 +24,17 @@
         <dependency>
             <groupId>com.hpe.lft</groupId>
             <artifactId>selenium-sdk</artifactId>
-            <version>14.3.0</version>
+<!--
+Note: the version of selenium-sdk changes from time to time.
+If you get an error that com.hpe.lft.selenium-sdk.pom file cannot be found
+You will have to find it.
+If running on Nimbus client, in the directory
+com.hpe.lft:selenium-sdk
+C:\Users\demo\.m2\repository\com\hpe\lft\selenium-sdk
+you will find all the installed version
+You should probably choose the highest version
+-->
+            <version>14.52.0</version>
         </dependency>
     </dependencies>
 
