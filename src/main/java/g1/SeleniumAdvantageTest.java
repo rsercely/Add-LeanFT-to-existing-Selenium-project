@@ -1,3 +1,8 @@
+/*
+Because this script does a purchase, it signs in
+You must update the username/password values below
+to those of your personal account
+ */
 package g1;
 
 import com.hpe.leanft.selenium.By;
@@ -38,6 +43,9 @@ public class SeleniumAdvantageTest {
 
     private static WebDriver driver;
     private static WebDriverWait wait;
+    //Declaring elements for tests
+    //Elements for registration test
+	private WebElement userBtn;
 	private WebElement createNewAccountBtn;
 	private WebElement usernameField;
 	private WebElement emailField;
@@ -48,16 +56,30 @@ public class SeleniumAdvantageTest {
 	private WebElement registerBtn;
 	// --Commented out by Inspection (7/17/2018 11:52 AM):WebElement whoLoggedIn;
 
+	//Elements for purchase test
+	private WebElement tablets;
+	private WebElement tabletToPurchase;
+	private WebElement addQuantity;
+	private WebElement addToCartBtn;
+	private WebElement openShoppingCart;
+	private WebElement checkoutBtn;
+	private WebElement purchaseUsernameField;
+	private WebElement purchasePasswordField;
+	private WebElement loginBtn;
+	private WebElement shippingNextBtn;
+	private WebElement safepayUsernameField;
+	private WebElement safepayPasswordField;
+	private WebElement payNowBtn;
+
 	private final Random randomGenerator = new Random();
 	private int randomInt = randomGenerator.nextInt(100);
 
 	@Before
 	public void beforeClass() throws InterruptedException {
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        wait = new WebDriverWait(driver, 10);
-
-        Thread.sleep(10*1000);
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        wait = new WebDriverWait(driver, 20);
+		Thread.sleep(3*1000);
     }
 	
 	@After
@@ -130,42 +152,13 @@ public class SeleniumAdvantageTest {
 
 	private void PurchaseTest() throws Exception{
 		driver.get("http://www.advantageonlineshopping.com");
-//selenium		tablets = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='tabletsImg']")));
-		WebElement tablets = wait.until(ExpectedConditions.elementToBeClickable(By.visibleText("TABLETS")));
-		tablets.click();
-//selenium fixed item       tabletToPurchase = wait.until(ExpectedConditions.elementToBeClickable(.By.cssSelector("html > body > div:nth-child(8) > section > article > div:nth-child(4) > div > div > div:nth-child(2) > ul > li:nth-child(1) > p:nth-child(4) > a")));
-
-// showing how LeanFT for Selenium can use multiple properties with Regular Expressions. Demo this
-// adding the looping and delay just so that the random nature is evident
-		int randomItem = randomGenerator.nextInt(3);
-
-		WebElement tabletToPurchase;
-		for (int i = 0; i<5; i++){
-			wait.until(ExpectedConditions.elementToBeClickable(By.name("buy_now"))); // make sure that the item page is up
-			Thread.sleep(3*1000);
-            tabletToPurchase = driver.findElements(new ByEach(
-                    By.tagName("a"),
-                    By.visibleText(Pattern.compile("^HP.*"))
-            )).get(randomItem);
-			System.out.println(tabletToPurchase.getText());
-
-			Thread.sleep(1*1000);
-			tabletToPurchase.click();
-			//			tabletToPurchase.click();
-			Thread.sleep(5*1000);
-
-			WebElement price = driver.findElement(By.xpath("//*[@id='Description']/h2"));
-			System.out.println(price.getText());
-			driver.navigate().back();
-
-			randomItem = randomGenerator.nextInt(3);
-		}
-        tabletToPurchase = driver.findElements(new ByEach(
-                By.tagName("a"),
-                By.visibleText(Pattern.compile("^HP.*"))
-        )).get(randomItem);
-		tabletToPurchase.click();
-		WebElement addQuantity = driver.findElement(By.className("plus"));
+		tablets = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='tabletsImg']")));
+		Thread.sleep(1*1000); // even with the above, need to sleep a bit
+        tablets.click();
+        tabletToPurchase = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("html > body > div:nth-child(8) > section > article > div:nth-child(4) > div > div > div:nth-child(2) > ul > li:nth-child(1) > p:nth-child(4) > a")));
+        Thread.sleep(1*1000);
+        tabletToPurchase.click();
+        addQuantity = driver.findElement(By.className("plus"));
         addQuantity.click();
 		WebElement addToCartBtn = driver.findElement(By.xpath("//*[@id='productProperties']/div[3]/button"));
         addToCartBtn.click();
