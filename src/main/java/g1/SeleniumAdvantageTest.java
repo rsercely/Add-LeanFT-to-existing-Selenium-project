@@ -1,3 +1,8 @@
+/*
+Because this script does a purchase, it signs in
+You must update the username/password values below
+to those of your personal account
+ */
 package g1;
 
 import org.openqa.selenium.*;
@@ -36,11 +41,11 @@ public class SeleniumAdvantageTest {
 	private WebElement emailField;
 	private WebElement passwordField;
 	private WebElement confirmPassField;
-	
+
 	private WebElement iAgreeCheckBox;
 	private WebElement registerBtn;
 	// --Commented out by Inspection (7/17/2018 11:52 AM):WebElement whoLoggedIn;
-	
+
 	//Elements for purchase test
 	private WebElement tablets;
 	private WebElement tabletToPurchase;
@@ -55,19 +60,18 @@ public class SeleniumAdvantageTest {
 	private WebElement safepayUsernameField;
 	private WebElement safepayPasswordField;
 	private WebElement payNowBtn;
-	
+
 	private final Random randomGenerator = new Random();
 	private int randomInt = randomGenerator.nextInt(100);
 
 	@Before
 	public void beforeClass() throws InterruptedException {
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        wait = new WebDriverWait(driver, 10);
-
-        Thread.sleep(10*1000);
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        wait = new WebDriverWait(driver, 20);
+		Thread.sleep(3*1000);
     }
-	
+
 	@After
 	public void afterClass(){
 		driver.quit();
@@ -138,6 +142,7 @@ public class SeleniumAdvantageTest {
 
 		driver.get("http://www.advantageonlineshopping.com");
 		tablets = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='tabletsImg']")));
+		Thread.sleep(1*1000); // even with the above, need to sleep a bit
         tablets.click();
         tabletToPurchase = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("html > body > div:nth-child(8) > section > article > div:nth-child(4) > div > div > div:nth-child(2) > ul > li:nth-child(1) > p:nth-child(4) > a")));
         Thread.sleep(1*1000);
