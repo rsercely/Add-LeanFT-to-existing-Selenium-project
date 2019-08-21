@@ -7,6 +7,12 @@
     <name>SeleniumAdvantageTest</name>
     <description>A typical Selenium test against AOS</description>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <test.src.dir>src</test.src.dir>
+        <leanft.version>RELEASE</leanft.version>
+    </properties>
+
     <dependencies>
         <!-- https://mvnrepository.com/artifact/junit/junit -->
         <dependency>
@@ -24,7 +30,7 @@
         <dependency>
             <groupId>com.hpe.lft</groupId>
             <artifactId>selenium-sdk</artifactId>
-            <version>14.3.0</version>
+            <version>${leanft.version}</version>
         </dependency>
     </dependencies>
 
