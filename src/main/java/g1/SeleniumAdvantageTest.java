@@ -69,13 +69,11 @@ public class SeleniumAdvantageTest {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         wait = new WebDriverWait(driver, 10);
-
-        Thread.sleep(10*1000);
     }
 	
 	@After
 	public void afterClass(){
-		//driver.quit();
+		driver.quit();
 	}
 
 
@@ -143,14 +141,16 @@ public class SeleniumAdvantageTest {
 
 		driver.get("http://www.advantageonlineshopping.com");
 		tablets = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='tabletsImg']")));
-		Thread.sleep(1*1000);
+		Thread.sleep(5*1000);
         tablets.click();
         tabletToPurchase = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("html > body > div:nth-child(8) > section > article > div:nth-child(4) > div > div > div:nth-child(2) > ul > li:nth-child(1) > p:nth-child(4) > a")));
         Thread.sleep(1*1000);
         tabletToPurchase.click();
         addQuantity = driver.findElement(By.className("plus"));
         addQuantity.click();
-        addToCartBtn = driver.findElement(By.xpath("//*[@id='productProperties']/div[3]/button"));
+		Thread.sleep(5*1000);
+		addToCartBtn = driver.findElement(By.xpath("//*[@id='productProperties']/div[3]/button"));
+		Thread.sleep(5*1000);
         addToCartBtn.click();
         openShoppingCart = wait.until(ExpectedConditions.elementToBeClickable(By.id("menuCart")));
         openShoppingCart.click();
