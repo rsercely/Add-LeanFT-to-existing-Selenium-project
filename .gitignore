@@ -65,4 +65,6 @@ fabric.properties
 .idea/workspace.xml
 core.21743
 core.21809
-target/
+target
+.idea/*
+*.iml
