@@ -6,12 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Add-LeanFT-to-existing-Selenium-project" />
+        <module name="a1" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="a1" target="1.7" />
-      <module name="Add-LeanFT-to-existing-Selenium-project" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>
