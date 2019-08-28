@@ -62,9 +62,6 @@ fabric.properties
 .idea/httpRequests
 
 .idea/encodings.xml
-.idea/workspace.xml
-core.21743
-core.21809
 target/
 .idea/*
 *.iml
