@@ -63,3 +63,5 @@ fabric.properties
 
 .idea/encodings.xml
 target/
+.idea/*
+*.iml
