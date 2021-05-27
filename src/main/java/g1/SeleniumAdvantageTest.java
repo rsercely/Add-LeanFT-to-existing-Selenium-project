@@ -5,9 +5,12 @@ to those of your personal account
  */
 package g1;
 
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
@@ -66,7 +69,11 @@ public class SeleniumAdvantageTest {
 
 	@Before
 	public void beforeClass() throws InterruptedException {
-        driver = new ChromeDriver();
+
+
+		ChromeOptions options = new ChromeOptions();
+		options.setBinary("C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe");
+		driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         wait = new WebDriverWait(driver, 10);
     }
