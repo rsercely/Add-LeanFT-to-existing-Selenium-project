@@ -15,6 +15,7 @@ import org.openqa.selenium.*;
 //java: a type with the same simple name is already defined
 // by the single-type-import of com.hpe.leanft.selenium.By
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -76,7 +77,9 @@ public class SeleniumAdvantageTest {
 
 	@Before
 	public void beforeClass() throws InterruptedException {
-        driver = new ChromeDriver();
+    	ChromeOptions options = new ChromeOptions();
+		options.setBinary("C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe");
+		driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         wait = new WebDriverWait(driver, 20);
 		Thread.sleep(3*1000);
@@ -160,7 +163,7 @@ public class SeleniumAdvantageTest {
         tabletToPurchase.click();
         addQuantity = driver.findElement(By.className("plus"));
         addQuantity.click();
-		WebElement addToCartBtn = driver.findElement(By.xpath("//*[@id='productProperties']/div[3]/button"));
+		WebElement addToCartBtn = driver.findElement(By.xpath("//*[@id='productProperties']/div[4]/button"));
         addToCartBtn.click();
 		WebElement openShoppingCart = wait.until(ExpectedConditions.elementToBeClickable(By.id("menuCart")));
         openShoppingCart.click();

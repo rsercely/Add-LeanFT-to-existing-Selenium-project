@@ -28,9 +28,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.hpe.lft</groupId>
-            <artifactId>selenium-sdk</artifactId>
-            <version>${leanft.version}</version>
+            <groupId>com.microfocus.adm.leanft</groupId>
+            <artifactId>leanft-selenium-java-sdk</artifactId>
+            <version>1.0.1</version>
         </dependency>
     </dependencies>
 
