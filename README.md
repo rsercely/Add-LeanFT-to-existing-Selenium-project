@@ -6,6 +6,8 @@ This project has two branches.
 - master is a branch that is a pure IntelliJ Selenium project against AOS.
 - AddLeanFT is a branch that has modified the imports to allow working with LeanFT OIC
 
+Note: If you run the default test, it does a purchase against the public AOS. The username/password in the code is a placeholder, and must be replaced with working credentials.
+
 # Usage
 Just clone the project, then use git to show how minor the differences are to enable LeanFT for Selenium. In IntelliJ project, just right click at the top level and comparet to branch.
 
