@@ -156,7 +156,7 @@ public class SeleniumAdvantageTest {
         addQuantity = driver.findElement(By.className("plus"));
         addQuantity.click();
 		Thread.sleep(5*1000);
-		addToCartBtn = driver.findElement(By.xpath("//*[@id='productProperties']/div[3]/button"));
+		addToCartBtn = driver.findElement(By.xpath("//*[@id='productProperties']/div[4]/button"));
 		Thread.sleep(5*1000);
         addToCartBtn.click();
         openShoppingCart = wait.until(ExpectedConditions.elementToBeClickable(By.id("menuCart")));
